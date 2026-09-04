@@ -15,7 +15,7 @@ export class Login {
 
   mensagem: string = '';
 
-  login(): void {
+  login(): void{
 
     if (this.usuario === 'admin' && this.senha === '123456') {
       this.mensagem = 'Login realizado com sucesso!';
