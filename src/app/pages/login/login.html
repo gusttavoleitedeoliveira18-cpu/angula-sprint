@@ -1,0 +1,62 @@
+<div class="login-container">
+
+  <!-- LADO ESQUERDO - LOGIN -->
+  <div class="login-area">
+
+    <div class="login-card">
+
+      
+      <img src="/img/logo.jpg" class="ford-logo" alt="Logo Ford">
+
+      <h1>Boas-vindas</h1>
+      <p>Entre para continuar</p>
+
+      <form>
+
+        <div class="campo">
+          <label for="usuario">Usuário</label>
+
+          <input
+            type="text"
+            id="usuario"
+            name="usuario"
+            [(ngModel)]="usuario"
+            placeholder="Digite seu usuário">
+        </div>
+
+        <div class="campo">
+          <label for="senha">Senha</label>
+
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            [(ngModel)]="senha"
+            placeholder="Digite sua senha">
+        </div>
+
+        <button type="button" (click)="login()">
+          Entrar
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <div class="car-area">
+
+    <div class="car-text">
+      <h2>FORÇA QUE<br><span>MOVE VOCÊ</span></h2>
+
+      <p>Desempenho extremo para<br>
+      qualquer desafio.</p>
+    </div>
+
+
+
+  </div>
+
+</div>

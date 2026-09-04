@@ -1,0 +1,146 @@
+<div class="dashboard">
+
+  <h1>Dashboard FORD</h1>
+
+  <div class="informacoes">
+
+    <!-- VEÍCULO -->
+    <div class="card veiculo-card">
+
+      <h3>Veículo</h3>
+
+      <select
+        [value]="veiculoSelecionado.nome"
+        (change)="selecionarVeiculo($event)">
+
+        <option value="Mustang">
+          Mustang
+        </option>
+
+        <option value="Ranger">
+          Ranger
+        </option>
+
+        <option value="Territory">
+          Territory
+        </option>
+
+        <option value="Bronco Sport">
+          Bronco Sport
+        </option>
+
+      </select>
+
+    </div>
+
+    <!-- TOTAL DE VENDAS -->
+    <div class="card">
+
+      <h3>Total de Vendas</h3>
+
+      <strong>1500</strong>
+
+      <span>Und.</span>
+
+    </div>
+
+    <!-- CONECTADOS -->
+    <div class="card">
+
+      <h3>Conectados</h3>
+
+      <strong>500</strong>
+
+      <span>Und.</span>
+
+    </div>
+
+    <!-- UPDATE SOFTWARE -->
+    <div class="card">
+
+      <h3>Update Software</h3>
+
+      <strong>750</strong>
+
+      <span>Und.</span>
+
+    </div>
+
+  </div>
+
+
+  <!-- IMAGEM DO CARRO -->
+
+  <div class="carro">
+
+    <img
+      [src]="veiculoSelecionado.imagem"
+      [alt]="veiculoSelecionado.nome">
+
+  </div>
+
+
+  <!-- INFORMAÇÕES DO VEÍCULO -->
+
+  <div class="tabela">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Código - Vin</th>
+
+          <th>Odômetro</th>
+
+          <th>Nível de Combustível</th>
+
+          <th>Status</th>
+
+          <th>Lat.</th>
+
+          <th>Long.</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        <tr>
+
+          <td>
+            {{ veiculoSelecionado.vin }}
+          </td>
+
+          <td>
+            {{ veiculoSelecionado.odometro }}
+          </td>
+
+          <td>
+            {{ veiculoSelecionado.combustivel }}
+          </td>
+
+          <td>
+            {{ veiculoSelecionado.status }}
+          </td>
+
+          <td>
+            {{ veiculoSelecionado.lat }}
+          </td>
+
+          <td>
+            {{ veiculoSelecionado.long }}
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

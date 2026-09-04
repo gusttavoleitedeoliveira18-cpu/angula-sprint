@@ -1,0 +1,55 @@
+<div class="home">
+
+  <!-- CABEÇALHO -->
+  <header class="header">
+
+    <!-- LOGO FORD -->
+    <img src="/img/logo.jpg" class="logo">
+
+    <!-- MENU HAMBÚRGUER -->
+    <button class="menu-button" (click)="toggleMenu()">
+      ☰
+    </button>
+
+    <!-- MENU -->
+    <nav class="menu" [class.aberto]="menuAberto">
+
+      <a routerLink="/home" (click)="fecharMenu()">Início</a>
+
+      <a href="#" (click)="fecharMenu()">Carros</a>
+
+      <a href="#" (click)="fecharMenu()">Comparar</a>
+
+      <a href="#" (click)="fecharMenu()">Contato</a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- ÁREA PRINCIPAL -->
+  <main class="hero">
+
+    <div class="texto">
+
+      <p class="ford">FORD</p>
+
+      <h1>
+        RANGER
+        <span>RAPTOR</span>
+      </h1>
+
+      <p class="descricao">
+        Potência, tecnologia e desempenho
+        para qualquer desafio.
+      </p>
+
+      <button class="botao">
+        Conheça o veículo
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
