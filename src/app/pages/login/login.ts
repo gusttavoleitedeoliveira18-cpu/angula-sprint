@@ -1,28 +1,37 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth } from '../../service/auth';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css'
 })
 export class Login {
+  
+   usuario = {
+    nome: '',
+    senha:''
+   }
+Input: any;
 
-  usuario: string = '';
-  senha: string = '';
+ constructor(private auth:Auth, private router:Router){}
 
-  mensagem: string = '';
+ login(){
 
-  login(): void{
+  this.auth.login(this.usuario).subscribe({
+    next:(response) =>{
+      this.router.navigate(['/home']);
 
-    if (this.usuario === 'admin' && this.senha === '123456') {
-      this.mensagem = 'Login realizado com sucesso!';
-    } else {
-      this.mensagem = 'Usuário ou senha incorretos.';
-    }
+    },
+    error:(err) => {
+      console.error("falha no login", err)
 
-  }
-
+    } 
+  })
+ }
 }

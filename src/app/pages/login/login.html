@@ -5,57 +5,45 @@
 
     <div class="login-card">
 
-      
       <img src="/img/logo.jpg" class="ford-logo" alt="Logo Ford">
 
       <h1>Boas-vindas</h1>
       <p>Entre para continuar</p>
 
-      <form>
+     <form (ngSubmit)="login()">
 
-        <div class="campo">
-          <label for="usuario">Usuário</label>
+<input type="text" [(ngModel)]="usuario.nome" name="nome">
 
-          <input
-            type="text"
-            id="usuario"
-            name="usuario"
-            [(ngModel)]="usuario"
-            placeholder="Digite seu usuário">
-        </div>
+<br>
 
-        <div class="campo">
-          <label for="senha">Senha</label>
+<input type="password" [(ngModel)]="usuario.senha" name="senha">
 
-          <input
-            type="password"
-            id="senha"
-            name="senha"
-            [(ngModel)]="senha"
-            placeholder="Digite sua senha">
-        </div>
+<button type="submit">Entrar</button>
 
-        <button type="button" (click)="login()">
-          Entrar
-        </button>
-
-      </form>
+</form>
+</div>
 
     </div>
 
   </div>
 
 
+  <!-- LADO DIREITO -->
   <div class="car-area">
 
     <div class="car-text">
-      <h2>FORÇA QUE<br><span>MOVE VOCÊ</span></h2>
 
-      <p>Desempenho extremo para<br>
-      qualquer desafio.</p>
+      <h2>
+        FORÇA QUE<br>
+        <span>MOVE VOCÊ</span>
+      </h2>
+
+      <p>
+        Desempenho extremo para<br>
+        qualquer desafio.
+      </p>
+
     </div>
-
-
 
   </div>
 
