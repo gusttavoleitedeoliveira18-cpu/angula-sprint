@@ -1,9 +1,9 @@
 <div class="home">
 
-  <!-- CABEÇALHO -->
+
   <header class="header">
 
-    <!-- LOGO FORD -->
+    
     <img src="/img/logo.jpg" class="logo">
 
     <!-- MENU HAMBÚRGUER -->
@@ -11,23 +11,22 @@
       ☰
     </button>
 
-    <!-- MENU -->
+    
     <nav class="menu" [class.aberto]="menuAberto">
 
-      <a routerLink="/home" (click)="fecharMenu()">Início</a>
+      <a routerLink="/home" (click)="fecharMenu()">Home</a>
 
-      <a href="#" (click)="fecharMenu()">Carros</a>
+      <a href="#" (click)="fecharMenu()">Dashboard</a>
 
-      <a href="#" (click)="fecharMenu()">Comparar</a>
+      <a href="#" (click)="fecharMenu()">Logout</a>
 
-      <a href="#" (click)="fecharMenu()">Contato</a>
-
+      
     </nav>
 
   </header>
 
 
-  <!-- ÁREA PRINCIPAL -->
+ 
   <main class="hero">
 
     <div class="texto">

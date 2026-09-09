@@ -1,37 +1,41 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Auth } from '../../service/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
-export class Login {
+export class LoginComponent {
+ 
+  usuario = '';
+  senha = '';
+
+  carregando = false;
+  mensagemErro = '';
+
   
-   usuario = {
-    nome: '',
-    senha:''
-   }
-Input: any;
+  fazerLogin(): void {
+    if (!this.usuario || !this.senha) {
+      this.mensagemErro = 'Por favor, preencha todos os campos.';
+      return;
+    }
 
- constructor(private auth:Auth, private router:Router){}
+    this.mensagemErro = '';
+    this.carregando = true;
 
- login(){
+    console.log('Dados prontos para envio:', {
+      usuario: this.usuario,
+      senha: this.senha
+    });
 
-  this.auth.login(this.usuario).subscribe({
-    next:(response) =>{
-      this.router.navigate(['/home']);
-
-    },
-    error:(err) => {
-      console.error("falha no login", err)
-
-    } 
-  })
- }
+   
+    setTimeout(() => {
+      this.carregando = false;
+      alert('Login efetuado com sucesso!');
+    }, 1500);
+  }
 }

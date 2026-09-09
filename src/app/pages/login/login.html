@@ -1,50 +1,67 @@
 <div class="login-container">
+  
+  <!-- Lado Esquerdo: Formulário -->
+  <div class="login-card">
+    <div class="form-wrapper">
+      
+      <!-- Logo da Ford -->
+      <div class="logo-area">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Ford_Motor_Company_Logo.svg" 
+          alt="Ford Logo"
+        />
+      </div>
 
-  <!-- LADO ESQUERDO - LOGIN -->
-  <div class="login-area">
+      <!-- Títulos -->
+      <h1 class="title">Boas-vindas</h1>
+      <p class="subtitle">Entre para continuar</p>
 
-    <div class="login-card">
+      <!-- Mensagem de Alerta (se houver erro) -->
+      <div *ngIf="mensagemErro" class="error-alert">
+        {{ mensagemErro }}
+      </div>
 
-      <img src="/img/logo.jpg" class="ford-logo" alt="Logo Ford">
+      <!-- Formulário -->
+      <form (ngSubmit)="fazerLogin()">
+        
+        <div class="input-group">
+          <label for="usuario">Usuário</label>
+          <input 
+            id="usuario"
+            type="text" 
+            [(ngModel)]="usuario" 
+            name="usuario" 
+            placeholder="Digite seu usuário" 
+          />
+        </div>
 
-      <h1>Boas-vindas</h1>
-      <p>Entre para continuar</p>
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <input 
+            id="senha"
+            type="password" 
+            [(ngModel)]="senha" 
+            name="senha" 
+            placeholder="Digite sua senha" 
+          />
+        </div>
 
-     <form (ngSubmit)="login()">
+        <button type="submit" [disabled]="carregando" class="btn-entrar">
+          {{ carregando ? 'Entrando...' : 'Entrar' }}
+        </button>
 
-<input type="text" [(ngModel)]="usuario.nome" name="nome">
-
-<br>
-
-<input type="password" [(ngModel)]="usuario.senha" name="senha">
-
-<button type="submit">Entrar</button>
-
-</form>
-</div>
+      </form>
 
     </div>
-
   </div>
 
-
-  <!-- LADO DIREITO -->
-  <div class="car-area">
-
-    <div class="car-text">
-
-      <h2>
-        FORÇA QUE<br>
-        <span>MOVE VOCÊ</span>
-      </h2>
-
-      <p>
-        Desempenho extremo para<br>
-        qualquer desafio.
-      </p>
-
+  <!-- Lado Direito: Banner Promocional -->
+  <div class="banner-card">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h2>FORÇA QUE<br><span>MOVE VOCÊ</span></h2>
+      <p>Desempenho extremo para qualquer desafio.</p>
     </div>
-
   </div>
 
 </div>
