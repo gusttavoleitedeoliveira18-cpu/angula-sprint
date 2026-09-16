@@ -1,0 +1,238 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.home {
+  min-height: 100vh;
+  background: #111;
+  color: white;
+  overflow: hidden;
+}
+
+
+/* CABEÇALHO */
+
+.header {
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 50px;
+
+  position: relative;
+  z-index: 10;
+
+  background: rgba(0, 0, 0, 0.35);
+}
+
+
+/* LOGO */
+
+.logo {
+  width: 90px;
+  height: auto;
+}
+
+
+/* BOTÃO HAMBÚRGUER */
+
+.menu-button {
+  background: none;
+  border: none;
+
+  color: white;
+
+  font-size: 35px;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+
+/* MENU */
+
+.menu {
+  position: absolute;
+
+  top: 80px;
+  right: 50px;
+
+  width: 220px;
+
+  background: #151515;
+
+  display: none;
+
+  flex-direction: column;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+
+/* MENU ABERTO */
+
+.menu.aberto {
+  display: flex;
+}
+
+
+/* LINKS DO MENU */
+
+.menu a {
+  color: white;
+
+  text-decoration: none;
+
+  padding: 15px;
+
+  font-size: 18px;
+
+  border-bottom: 1px solid #333;
+}
+
+
+.menu a:hover {
+  background: #0066ff;
+}
+
+
+/* ÁREA PRINCIPAL */
+
+.hero {
+  min-height: calc(100vh - 80px);
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.15)
+    ),
+    url('/img/raptor.jpg');
+
+  background-size: cover;
+
+  background-position: center;
+}
+
+
+/* TEXTO */
+
+.texto {
+  position: relative;
+
+  z-index: 2;
+
+  margin-left: 8%;
+
+  max-width: 500px;
+}
+
+
+.ford {
+  font-size: 20px;
+
+  letter-spacing: 5px;
+
+  font-weight: bold;
+}
+
+
+.texto h1 {
+  font-size: 70px;
+
+  margin: 10px 0;
+
+  line-height: 0.9;
+}
+
+
+.texto h1 span {
+  display: block;
+
+  color: #0066ff;
+}
+
+
+.descricao {
+  font-size: 20px;
+
+  color: #ddd;
+
+  line-height: 1.5;
+}
+
+
+/* BOTÃO */
+
+.botao {
+  margin-top: 20px;
+
+  padding: 15px 30px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: #0066ff;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+.botao:hover {
+  background: #0052cc;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 768px) {
+
+  .header {
+    padding: 0 20px;
+  }
+
+  .menu {
+    right: 20px;
+  }
+
+  .texto {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .texto h1 {
+    font-size: 45px;
+  }
+
+  .descricao {
+    font-size: 16px;
+  }
+
+}
