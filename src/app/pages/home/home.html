@@ -1,9 +1,7 @@
 <div class="home">
 
-
   <header class="header">
 
-    
     <img src="/img/logo.jpg" class="logo">
 
     <!-- MENU HAMBÚRGUER -->
@@ -11,22 +9,19 @@
       ☰
     </button>
 
-    
+    <!-- MENU -->
     <nav class="menu" [class.aberto]="menuAberto">
 
       <a routerLink="/home" (click)="fecharMenu()">Home</a>
 
-      <a href="#" (click)="fecharMenu()">Dashboard</a>
+      <a routerLink="/dashboard" (click)="fecharMenu()">Dashboard</a>
 
       <a href="#" (click)="fecharMenu()">Logout</a>
 
-      
     </nav>
 
   </header>
 
-
- 
   <main class="hero">
 
     <div class="texto">
@@ -52,3 +47,4 @@
   </main>
 
 </div>
+```
