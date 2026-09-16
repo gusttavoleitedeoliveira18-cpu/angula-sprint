@@ -1,0 +1,50 @@
+
+<button class="hamburger-btn" (click)="toggleMenu()" type="button" [class.open]="menuAberto" aria-expanded="{{menuAberto}}">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<div 
+  class="menu-overlay" 
+  *ngIf="menuAberto" 
+  (click)="toggleMenu()">
+</div>
+
+<aside class="sidebar" [class.open]="menuAberto">
+
+  <div class="sidebar-header">
+    <img src="img/logo.jpg" alt="Ford Logo" class="logo">
+
+    <button 
+      class="close-btn" 
+      type="button"
+      (click)="toggleMenu()">
+      ✕
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+
+    <a class="nav-item" (click)="irPara('home')">
+      Home
+    </a>
+
+    <a class="nav-item" (click)="irPara('dashboard')">
+      Dashboard
+    </a>
+
+  </nav>
+
+  <div class="sidebar-footer">
+    <button 
+      class="btn-logout" 
+      type="button"
+      (click)="logout()">
+      Sair
+    </button>
+  </div>
+
+</aside>
+
+

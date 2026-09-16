@@ -2,66 +2,39 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../service/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrl: './login.css'
 })
 export class LoginComponent {
 
-  usuario = '';
-  senha = '';
+  usuario: string = '';
+  senha: string = '';
+  carregando: boolean = false;
+  mensagemErro: string | null = null;
 
-  carregando = false;
-  mensagemErro = '';
+  constructor(private auth: AuthService, private router: Router) {}
 
-  constructor(
-    private router: Router,
-    private http: HttpClient
-  ) {}
-
-  fazerLogin(): void {
-
-    if (!this.usuario || !this.senha) {
-      this.mensagemErro = 'Por favor, preencha todos os campos.';
-      return;
-    }
-
+  fazerLogin() {
     this.carregando = true;
-    this.mensagemErro = '';
-
-    const dadosLogin = {
-      nome: this.usuario,
-      senha: this.senha
-    };
-
-    this.http.post('http://localhost:3001/login', dadosLogin)
-      .subscribe({
-        next: (resposta) => {
-
-          console.log('Login realizado:', resposta);
-
-          this.carregando = false;
-
-          this.router.navigate(['/home']);
-        },
-
-        error: (erro) => {
-
-          console.error('Erro no login:', erro);
-
-          this.carregando = false;
-
-          if (erro.status === 401) {
-            this.mensagemErro = 'Usuário ou senha incorretos.';
-          } else {
-            this.mensagemErro = 'Não foi possível conectar com a API.';
-          }
-        }
-      });
+    this.mensagemErro = null;
+    this.auth.login({ nome: this.usuario, senha: this.senha }).subscribe({
+      next: () => {
+        this.carregando = false;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.carregando = false;
+        this.mensagemErro = 'Falha no login';
+        console.error('falha no login', err);
+      }
+    });
   }
 }
+
+export { LoginComponent as Login };

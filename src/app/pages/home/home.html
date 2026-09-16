@@ -1,50 +1,36 @@
+<app-menu></app-menu>
 <div class="home">
 
-  <header class="header">
+	<header class="header">
 
-    <img src="/img/logo.jpg" class="logo">
+		<img src="/img/logo.jpg" class="logo">
 
-    <!-- MENU HAMBÚRGUER -->
-    <button class="menu-button" (click)="toggleMenu()">
-      ☰
-    </button>
+		<!-- MENU HAMBÚRGUER removido: usamos o `app-menu` componente -->
 
-    <!-- MENU -->
-    <nav class="menu" [class.aberto]="menuAberto">
+	</header>
 
-      <a routerLink="/home" (click)="fecharMenu()">Home</a>
+	<main class="hero">
 
-      <a routerLink="/dashboard" (click)="fecharMenu()">Dashboard</a>
+		<div class="texto">
 
-      <a href="#" (click)="fecharMenu()">Logout</a>
+			<p class="ford">FORD</p>
 
-    </nav>
+			<h1>
+				RANGER
+				<span>RAPTOR</span>
+			</h1>
 
-  </header>
+			<p class="descricao">
+				Potência, tecnologia e desempenho
+				para qualquer desafio.
+			</p>
 
-  <main class="hero">
+			<button class="botao">
+				Conheça o veículo
+			</button>
 
-    <div class="texto">
+		</div>
 
-      <p class="ford">FORD</p>
-
-      <h1>
-        RANGER
-        <span>RAPTOR</span>
-      </h1>
-
-      <p class="descricao">
-        Potência, tecnologia e desempenho
-        para qualquer desafio.
-      </p>
-
-      <button class="botao">
-        Conheça o veículo
-      </button>
-
-    </div>
-
-  </main>
+	</main>
 
 </div>
-```

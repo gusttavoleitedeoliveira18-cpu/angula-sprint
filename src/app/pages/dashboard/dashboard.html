@@ -1,67 +1,50 @@
+
+<app-menu></app-menu>
+
 <div class="dashboard">
 
   <h1>Dashboard FORD</h1>
 
   <div class="informacoes">
 
-    <!-- VEÍCULO -->
+    <!-- Seleção de veículo -->
     <div class="card veiculo-card">
+      <h3>Escolha o veículo</h3>
 
-      <h3>Veículo</h3>
+      <div *ngIf="carregandoVeiculos">Carregando veículos...</div>
 
-      <select
+      <select *ngIf="!carregandoVeiculos"
         [value]="veiculoSelecionado?.id"
         (change)="selecionarVeiculo($event)">
 
+        <option value="" disabled selected *ngIf="!veiculoSelecionado">-- selecione --</option>
         <option
           *ngFor="let veiculo of veiculos"
           [value]="veiculo.id">
-
           {{ veiculo.vehicle }}
-
         </option>
-
       </select>
 
+      
     </div>
 
-    <!-- TOTAL -->
+    <!-- Estatísticas rápidas -->
     <div class="card">
-
       <h3>Total de Vendas</h3>
-
-      <strong>
-        {{ veiculoSelecionado?.volumetotal || 0 }}
-      </strong>
-
+      <strong>{{ veiculoSelecionado?.volumetotal || 0 }}</strong>
       <span>Und.</span>
-
     </div>
 
-    <!-- CONECTADOS -->
     <div class="card">
-
       <h3>Conectados</h3>
-
-      <strong>
-        {{ veiculoSelecionado?.connected || 0 }}
-      </strong>
-
+      <strong>{{ veiculoSelecionado?.connected || 0 }}</strong>
       <span>Und.</span>
-
     </div>
 
-    <!-- UPDATE SOFTWARE -->
     <div class="card">
-
       <h3>Update Software</h3>
-
-      <strong>
-        {{ veiculoSelecionado?.softwareUpdates || 0 }}
-      </strong>
-
+      <strong>{{ veiculoSelecionado?.softwareUpdates || 0 }}</strong>
       <span>Und.</span>
-
     </div>
 
   </div>
@@ -70,12 +53,14 @@
   <!-- IMAGEM DO CARRO -->
 
   <div class="carro">
+    <div *ngIf="carregandoDados">Carregando dados do veículo...</div>
 
-    <img
-      *ngIf="veiculoSelecionado"
-      [src]="veiculoSelecionado.img"
-      [alt]="veiculoSelecionado.vehicle">
+    <img *ngIf="!carregandoDados && veiculoSelecionado"
+      [src]="veiculoSelecionado.img || 'img/raptor.jpg'"
+      [alt]="veiculoSelecionado.vehicle"
+    >
 
+    <div *ngIf="!veiculoSelecionado && !carregandoVeiculos">Nenhum veículo selecionado.</div>
   </div>
 
 
@@ -88,7 +73,16 @@
       <thead>
 
         <tr>
-          <th>Código - Vin</th>
+          <th>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span>Código - Vin</span>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input id="vin-table" name="vinTable" type="text" [(ngModel)]="vinInput" placeholder="Cole o VIN aqui" />
+                <button type="button" (click)="consultarPorVin()">Consultar</button>
+              </div>
+              <div *ngIf="erroVinMessage" style="color:#b91c1c;font-size:12px">{{ erroVinMessage }}</div>
+            </div>
+          </th>
           <th>Odômetro</th>
           <th>Nível de Combustível</th>
           <th>Status</th>
@@ -100,32 +94,16 @@
 
       <tbody>
 
-        <tr>
-
-          <td>
-            {{ dadosVeiculo?.id || '-' }}
-          </td>
-
-          <td>
-            {{ dadosVeiculo?.odometro || '-' }}
-          </td>
-
-          <td>
-            {{ dadosVeiculo?.nivelCombustivel || '-' }}%
-          </td>
-
-          <td>
-            {{ dadosVeiculo?.status || '-' }}
-          </td>
-
-          <td>
-            {{ dadosVeiculo?.lat || '-' }}
-          </td>
-
-          <td>
-            {{ dadosVeiculo?.long || '-' }}
-          </td>
-
+        <tr *ngIf="!carregandoDados">
+          <td>{{ dadosVeiculo?.id || '-' }}</td>
+          <td>{{ dadosVeiculo?.odometro || '-' }}</td>
+          <td>{{ dadosVeiculo?.nivelCombustivel || '-' }}%</td>
+          <td>{{ dadosVeiculo?.status || '-' }}</td>
+          <td>{{ dadosVeiculo?.lat || '-' }}</td>
+          <td>{{ dadosVeiculo?.long || '-' }}</td>
+        </tr>
+        <tr *ngIf="carregandoDados">
+          <td colspan="6">Carregando...</td>
         </tr>
 
       </tbody>

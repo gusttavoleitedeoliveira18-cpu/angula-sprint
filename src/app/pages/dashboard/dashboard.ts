@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { VehicleService } from '../../service/vehicle.service';
+import { MenuComponent } from '../../componentes/menu/menu';
 
 interface Veiculo {
   id: number;
@@ -23,7 +26,7 @@ interface DadosVeiculo {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, MenuComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -35,60 +38,66 @@ export class Dashboard implements OnInit {
 
   dadosVeiculo: DadosVeiculo | null = null;
 
-  constructor(private http: HttpClient) {}
+  carregandoVeiculos = false;
+  carregandoDados = false;
+  vinInput: string = '';
+  erroVinMessage: string | null = null;
+
+  constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
     this.carregarVeiculos();
   }
 
   carregarVeiculos(): void {
-
-    this.http.get<{ vehicles: Veiculo[] }>(
-      'http://localhost:3001/vehicles'
-    ).subscribe({
+    this.carregandoVeiculos = true;
+    this.vehicleService.getVehicles().subscribe({
       next: (resposta) => {
-
-        this.veiculos = resposta.vehicles;
-
-        if (this.veiculos.length > 0) {
-          this.veiculoSelecionado = this.veiculos[0];
-        }
-
+        this.veiculos = resposta.vehicles || [];
+        this.carregandoVeiculos = false;
+        // Do NOT auto-select or auto-fetch vehicle data here.
+        this.veiculoSelecionado = null;
       },
-
       error: (erro) => {
+        this.carregandoVeiculos = false;
         console.error('Erro ao carregar veículos:', erro);
       }
     });
   }
 
   selecionarVeiculo(event: Event): void {
-
     const select = event.target as HTMLSelectElement;
-
     const id = Number(select.value);
-
-    const veiculo = this.veiculos.find(
-      item => item.id === id
-    );
-
-    if (veiculo) {
-      this.veiculoSelecionado = veiculo;
-    }
+    this.selecionarVeiculoById(id);
   }
 
-  carregarDadosVeiculo(vin: string): void {
+  selecionarVeiculoById(id: number): void {
+    if (!id) return;
+    // Only set the selected vehicle and clear previously loaded vehicle data.
+    const veiculo = this.veiculos.find(v => v.id === id) || null;
+    this.veiculoSelecionado = veiculo;
+    this.dadosVeiculo = null;
+  }
 
-    this.http.post<DadosVeiculo>(
-      'http://localhost:3001/vehicleData',
-      { vin }
-    ).subscribe({
+  consultarPorVin(): void {
+    const vin = (this.vinInput || '').trim();
+    if (!vin) {
+      this.erroVinMessage = 'Informe um VIN válido.';
+      return;
+    }
+
+    this.erroVinMessage = null;
+    this.carregandoDados = true;
+
+    this.vehicleService.getVehicleDataByVin(vin).subscribe({
       next: (dados) => {
         this.dadosVeiculo = dados;
+        this.carregandoDados = false;
       },
-
-      error: (erro) => {
-        console.error('Erro ao carregar dados do veículo:', erro);
+      error: (err) => {
+        console.error('Erro ao consultar VIN:', err);
+        this.erroVinMessage = 'Não foi possível encontrar dados para o VIN informado.';
+        this.carregandoDados = false;
       }
     });
   }
